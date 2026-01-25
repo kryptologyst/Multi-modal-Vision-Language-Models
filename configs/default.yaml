@@ -1,0 +1,40 @@
+# Default configuration for Multi-modal Vision-Language Models
+
+# Model configuration
+model:
+  name: "clip"  # Options: clip, blip
+  pretrained: "openai/clip-vit-base-patch32"
+  image_size: 224
+  max_text_length: 77
+  freeze_vision: false
+  freeze_text: false
+
+# Data configuration
+data:
+  batch_size: 32
+  num_workers: 4
+  image_size: 224
+  text_max_length: 77
+  augmentation: true
+
+# Training configuration
+training:
+  learning_rate: 1e-4
+  weight_decay: 1e-4
+  num_epochs: 10
+  warmup_steps: 1000
+  gradient_accumulation_steps: 1
+  mixed_precision: true
+  save_every: 5
+
+# Evaluation configuration
+evaluation:
+  metrics: ["accuracy", "bleu", "cider", "rouge"]
+  batch_size: 64
+  save_predictions: true
+
+# General configuration
+seed: 42
+device: "auto"  # Options: auto, cuda, mps, cpu
+output_dir: "./outputs"
+log_level: "INFO"
